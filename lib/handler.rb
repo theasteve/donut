@@ -21,6 +21,13 @@ class Handler
     end
   end
 
+  private
+
+  USERS_SELECTED_FIELD = :"users_select-action"
+  USERS_SELECTED_KEY = :selected_user
+  TASK_DESCRIPTION_FIELD = :"plain_text_input-action"
+  TASK_DESCRIPTION_KEY = :value
+
   def task_complete_request?
     @payload[:type] == 'view_submission' && @payload[:view][:title][:text] == 'Notify'
   end
@@ -36,13 +43,6 @@ class Handler
   def open_task_complete_modal_request?
     @payload[:type] == 'shortcut' && @payload[:callback_id] == 'task_complete'
   end
-
-  private
-
-  USERS_SELECTED_FIELD = :"users_select-action"
-  USERS_SELECTED_KEY = :selected_user
-  TASK_DESCRIPTION_FIELD = :"plain_text_input-action"
-  TASK_DESCRIPTION_KEY = :value
 
   def send_message_to_notify_task_completed
     @slack_client.chat_message_to_user(
