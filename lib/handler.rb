@@ -9,7 +9,7 @@ class Handler
     @slack_client = slack_client
   end
 
-  def self.process
+  def process
     if task_complete_request?
       send_message_to_notify_task_completed
     elsif task_assigned_request?
