@@ -6,16 +6,14 @@ require './lib/slack'
 require './lib/handler'
 
 class TasksController < Sinatra::Base
-  include Template
-
   post '/tasks' do
-    payload = sanitize_payload
+    payload = parse_payload
     Handler.new(payload: payload).process
   end
 
   private
 
-  def sanitize_payload
+  def parse_payload
     JSON.parse(params[:payload], symbolize_names: true)
   end
 end

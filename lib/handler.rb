@@ -2,6 +2,7 @@ require './lib/slack'
 
 # Handle the requests made by the Slack API
 class Handler
+  include Template
   attr_accessor :payload, :slack_client
 
   def initialize(payload:, slack_client: SlackAdapter.new)
